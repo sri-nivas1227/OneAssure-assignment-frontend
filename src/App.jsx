@@ -50,20 +50,21 @@ function App() {
       console.log(data)
       setExpectedPremium(data.expectedPremium)
       document.querySelector('#premium-output').classList.remove('hidden')
+      document.querySelector('#form').classList.add('hidden','md:block')
     }
   }
   return (
     <>
-     <div className="bg-gradient-to-br from-blue-500 via-blue-400 to-blue-600 w-full h-screen flex overflow-auto justify-around items-center">
-      <form onSubmit={handleSubmit} className="bg-slate-800 bg-opacity-80 p-10 rounded-lg">
+     <div className="bg-gradient-to-br from-blue-500 via-blue-400 to-blue-600 p-10 w-full h-screen flex overflow-auto justify-around items-center">
+      <form id="form" onSubmit={handleSubmit} className=" bg-slate-800 bg-opacity-80 p-10 rounded-lg">
         <div id="form-field" className="text-white">
           <label htmlFor="age" className="text-xl font-semibold">Add age(s) of members:</label>
       {ageList.map((age, index) => (
           <div key={index} id="ages" className="py-2 flex flex-col gap-2">
             <div id="first-division" className="flex gap-5">
               <input required type="number" name="age" id="age" max={90} value={age.age} onChange={(e)=> handleAgeChange(e, index)} className="rounded-lg text-black focus:outline-none focus:border-none p-1 w-1/2" />
-              {ageList.length-1 === index && ageList.length<4 && 
-              <button onClick={handleAgeAdd} type='button' id="add-btn" className="w-1/3 text-white bg-blue-600  hover:bg-blue-800 hover:to-blue-400 font-medium rounded-lg text-sm px-2 py-1 text-center">
+              {ageList.length-1 === index && 
+              <button onClick={handleAgeAdd} type='button' id="add-btn" className="md:w-1/3 w-fit  text-white bg-blue-600  hover:bg-blue-800 hover:to-blue-400 font-medium rounded-lg text-sm px-2 py-1 text-center">
                 <span>Add Member</span>
               </button>
               }
@@ -78,19 +79,19 @@ function App() {
           </div>
       ))}
           <label htmlFor="insurance" className="text-xl font-semibold">Sum Insured:</label>
-          <div id="suminsured" className="flex justify-around">
+          <div id="suminsured" className="flex flex-col md:flex-row justify-around">
             {/* add radio buttons with three options 300000, 400000, 500000 */}
             <div className="p-1">
               <input type="radio" required name="insurance" id="3l" value="300000" />
-              <label htmlFor="3l"> $300,000</label>
+              <label htmlFor="3l"> Rs. 300,000</label>
             </div>
             <div className="p-1">
               <input type="radio" required name="insurance" id="4l" value="400000" />
-              <label htmlFor="4l"> $400,000</label>
+              <label htmlFor="4l"> Rs. 400,000</label>
             </div>
             <div className="p-1">
               <input type="radio" required name="insurance" id="5l" value="500000" />
-              <label htmlFor="5l"> $500,000</label>
+              <label htmlFor="5l"> Rs. 500,000</label>
             </div>
           </div>
           <label htmlFor="city-tier" className="text-xl font-semibold">City Tier:</label>
@@ -126,10 +127,10 @@ function App() {
 
         </div>
       </form>
-      <div id="premium-output" className="border rounded-lg p-10 text-center  bg-green-300">
+      <div id="premium-output" className="border w-[90%] md:w-fit rounded-lg p-10 text-center hidden bg-green-300">
         <div className="text-center m-2">
           <span className="text-2xl font-semibold">Expected Premium: </span>
-          <span className="text-2xl font-bold">{expectedPremium} Rs</span>
+          <span className="text-2xl font-bold">Rs. {expectedPremium}/-</span>
         </div>
         <button className="px-5 m-2 py-2.5 text-white font-semibold bg-green-700 rounded-lg hover:bg-green-800 focus:bg-green-800" onClick={()=>{window.location.reload(false)}} id="reload">Calculate Again</button>
       </div>
