@@ -126,9 +126,12 @@ function App() {
 
         </div>
       </form>
-      <div id="premium-output" className="border p-10 hidden bg-green-300">
-        <span className="">Expected Premium: </span>
-        <span className="">{expectedPremium} Rs</span>
+      <div id="premium-output" className="border rounded-lg p-10 text-center  bg-green-300">
+        <div className="text-center m-2">
+          <span className="text-2xl font-semibold">Expected Premium: </span>
+          <span className="text-2xl font-bold">{expectedPremium} Rs</span>
+        </div>
+        <button className="px-5 m-2 py-2.5 text-white font-semibold bg-green-700 rounded-lg hover:bg-green-800 focus:bg-green-800" onClick={()=>{window.location.reload(false)}} id="reload">Calculate Again</button>
       </div>
      </div>
     </>
