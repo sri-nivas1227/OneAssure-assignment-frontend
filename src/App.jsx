@@ -2,6 +2,7 @@ import { useState } from "react"
 
 function App() {
   const [ageList, setAgeList] = useState([{'age':''}])
+  const [expectedPremium, setExpectedPremium] = useState(0)
   const handleAgeAdd = () => {
     setAgeList([...ageList, {'age':''}])
   }
@@ -47,12 +48,13 @@ function App() {
     if(response.status === 200){
       const data = await response.json()
       console.log(data)
-      alert(`Your Premium is ${data.expectedPremium}`)
+      setExpectedPremium(data.expectedPremium)
+      document.querySelector('#premium-output').classList.remove('hidden')
     }
   }
   return (
     <>
-     <div className="bg-gradient-to-br from-blue-500 via-blue-400 to-blue-600 w-full h-screen flex justify-around items-center">
+     <div className="bg-gradient-to-br from-blue-500 via-blue-400 to-blue-600 w-full h-screen flex overflow-auto justify-around items-center">
       <form onSubmit={handleSubmit} className="bg-slate-800 bg-opacity-80 p-10 rounded-lg">
         <div id="form-field" className="text-white">
           <label htmlFor="age" className="text-xl font-semibold">Add age(s) of members:</label>
@@ -124,7 +126,10 @@ function App() {
 
         </div>
       </form>
-      <div id="premium-output" className="w-20 h-20 bg-yellow-200 hidden"></div>
+      <div id="premium-output" className="border p-10 hidden bg-green-300">
+        <span className="">Expected Premium: </span>
+        <span className="">{expectedPremium} Rs</span>
+      </div>
      </div>
     </>
   )
